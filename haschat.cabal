@@ -1,0 +1,151 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: f5b8e2464fef4fee4a40645363a7334004fe932b205d1edcfe22c7c0a6e9f143
+
+name:           haschat
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/haschat#readme>
+homepage:       https://github.com/githubuser/haschat#readme
+bug-reports:    https://github.com/githubuser/haschat/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2019 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/haschat
+
+library
+  exposed-modules:
+      ChatWindow
+      ClientNetwork
+      ClientCLI
+      ClientState
+      ChanWithHistory
+      Consts
+      Crypto
+      Database
+      Logging
+      Server
+      Types
+      Utils
+  other-modules:
+      Paths_haschat
+  hs-source-dirs:
+      src
+  build-depends:
+        base >=4.7 && <5
+      , HsOpenSSL
+      , MissingH
+      , async
+      , base64-bytestring
+      , beam-core
+      , beam-migrate
+      , beam-sqlite
+      , brick
+      , bytestring
+      , containers
+      , cryptonite
+      , data-default
+      , interpolatedstring-perl6
+      , lens
+      , memory
+      , microlens
+      , microlens-th
+      , monad-loops
+      , mtl
+      , network
+      , network-simple
+      , parsec
+      , sqlite-simple
+      , stm
+      , structured-cli
+      , text
+      , text-zipper
+      , time
+      , utf8-string
+      , vector
+      , vty
+      , word8
+  default-language: Haskell2010
+  ghc-options: -Wall -fwarn-incomplete-patterns
+  default-extensions:
+    NumDecimals
+    OverloadedStrings
+
+
+test-suite haschat-tests
+  main-is:             Tests.hs
+  hs-source-dirs:      tests
+  other-modules:
+    Tests.DbSpec
+    Tests.NetSpec
+  type: exitcode-stdio-1.0
+  build-depends:
+        base >=4.7 && <5
+      , haschat
+      , containers
+      , cryptonite
+      , filepath
+      , hspec
+      , memory
+      , network
+      , temporary
+      , time
+  default-language:    Haskell2010
+  ghc-options:         -Wall -threaded -rtsopts "-with-rtsopts=-N"
+
+
+executable haschat-client
+  main-is: HasChatClient.hs
+  other-modules:
+      Paths_haschat
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+        base >=4.7 && <5
+      , containers
+      , data-default
+      , haschat
+      , interpolatedstring-perl6
+      , mtl
+      , network
+      , parsec
+      , split
+      , stm
+      , structured-cli
+      , time
+  default-language: Haskell2010
+  ghc-options: -Wall -fwarn-incomplete-patterns
+
+
+executable haschat-server
+  main-is: HasChatServer.hs
+  other-modules:
+      Paths_haschat
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+        base >=4.7 && <5
+      , containers
+      , data-default
+      , haschat
+      , mtl
+      , parsec
+      , stm
+      , structured-cli
+  default-language: Haskell2010
+  ghc-options: -Wall -fwarn-incomplete-patterns
+
