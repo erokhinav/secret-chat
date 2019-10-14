@@ -230,9 +230,13 @@ loadState conn userName = do
     rooms <- fmap Map.fromList $ forM dbRooms $ \Room{..} -> do
         room' <- initRoomState' (Set.fromList $ read $ T.unpack _roomUsers)
                                 (fromMaybe [] $ Map.lookup _roomName historyByRoom)
-        let room = room' { dhSharedKey = either (\err -> error $ "Can't convert shared key: " ++ err)
-                                                (Right . SharedKey)
-                                                (convertFromBase Base64 $ T.encodeUtf8 _roomKey) }
-        return (T.unpack _roomName, room)
+        let roomName = T.unpack _roomName
+        if (roomName == defaultRoomName)
+          then return (roomName, room')
+          else do
+            let room = room' { dhSharedKey = either (\err -> error $ "Can't convert shared key: " ++ err)
+                                                  (Right . SharedKey)
+                                                  (convertFromBase Base64 $ T.encodeUtf8 _roomKey) }
+            return (roomName, room)
     return $ ClientState rooms userName
 

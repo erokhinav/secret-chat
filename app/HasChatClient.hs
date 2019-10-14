@@ -49,6 +49,7 @@ main = do
                     then return clientState'
                     else do
                         defRoom <- initRoomState myUserName
+                        saveRoom conn defaultRoomName defRoom
                         return $ clientState' { clientRooms = Map.insert defaultRoomName defRoom (clientRooms clientState') }
             clientStateRef <- newMVar clientState
             Net.run clientStateRef (saveRoom conn) myUserName myHost myPort serverHost serverPort $ \net -> do
