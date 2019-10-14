@@ -36,7 +36,7 @@ import qualified Data.Text.Encoding as T
 
 import Types
 import ClientState
-
+import Consts
 
 -- User -----------------------------------------------------------------------
 
